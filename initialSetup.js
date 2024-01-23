@@ -1,5 +1,6 @@
 const fs = require("fs");
-const downloadData = require("./Services/downloadData");
+const DownloadData = require("./Services/downloadData");
+const ExtractZip = require("./Services/extractData");
 const path = "./Data";
 
 fs.access(path, (error) => {
@@ -24,10 +25,12 @@ const get50DaysData = () => {
       .toString()
       .padStart(2, "0")}${date.getFullYear().toString().slice(-2)}`;
 
-    downloadData(formattedDate)
+    DownloadData(formattedDate)
       .then((response) => {
         const zipFilePath = `./Data/${formattedDate}.zip`;
         fs.writeFileSync(zipFilePath, Buffer.from(response.data));
+
+        ExtractZip(zipFilePath);
       })
       .catch((error) => {});
   }
