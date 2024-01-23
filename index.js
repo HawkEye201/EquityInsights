@@ -1,9 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const initialSetup = require("./initialSetup");
-
 require("dotenv").config();
+
+require("./database");
+
+const initialSetup = require("./initialSetup");
 
 const app = express();
 const port = 3000;
