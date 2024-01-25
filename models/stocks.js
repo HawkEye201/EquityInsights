@@ -2,25 +2,34 @@ var mongoose = require("mongoose");
 
 var StocksSchema = new mongoose.Schema(
   {
-    name: String,
+    name: {
+      type: String,
+      required: true,
+    },
+    code: {
+      type: String,
+      unique: true,
+      required: true,
+    },
     favourite: {
       type: Boolean,
       default: false,
     },
     data: [
       {
-        code: String,
-        open: Number,
-        high: Number,
-        low: Number,
-        close: Number,
-        date: Date,
+        open: { type: Number, required: true },
+        high: { type: Number, required: true },
+        low: { type: Number, required: true },
+        close: { type: Number, required: true },
+        date: { type: Date, required: true },
       },
     ],
   },
   { timestamps: true }
 );
 
-Stocks = mongoose.model("Stocks", StocksSchema, "Stocks");
+StocksSchema.index({ code: 1 });
 
-module.exports = Stocks;
+Stock = mongoose.model("Stock", StocksSchema, "Stock");
+
+module.exports = Stock;

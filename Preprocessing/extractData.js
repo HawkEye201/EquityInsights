@@ -11,6 +11,7 @@ const ExtractZip = (zipFilePath) => {
 
   const csvData = zip.readAsText(csvEntry);
   // console.log(csvData);
+  return csvData;
 };
 
 module.exports = ExtractZip;
