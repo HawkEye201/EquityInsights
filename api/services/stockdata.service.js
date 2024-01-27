@@ -3,9 +3,27 @@ const StocksSchema = require("../../models/stocks");
 class StockDataService {
   async top10Stocks() {
     try {
-      const top10Stocks = await StocksSchema.find().limit(10);
-      const stockNames = top10Stocks.map((stock) => stock.name);
-      return stockNames;
+      const top10Stocks = await StocksSchema.aggregate([
+        {
+          $project: {
+            _id: 1,
+            name: 1,
+            code: 1,
+            lastClose: {
+              $let: {
+                vars: {
+                  lastData: { $arrayElemAt: ["$data", -1] },
+                },
+                in: "$$lastData.close",
+              },
+            },
+          },
+        },
+
+        { $sort: { lastClose: -1 } },
+        { $limit: 10 },
+      ]);
+      return top10Stocks;
     } catch (error) {
       throw { message: error.message };
     }
