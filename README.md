@@ -22,7 +22,7 @@ For running this project locally, you need to set up and define the environment 
 ## API Endpoints
 - "localhost:3000/top10stocks" - GET
   
-  ![image](https://github.com/HawkEye201/EquityInsights/assets/64590605/e5fe493b-604d-4b11-9fbd-fbc9d69fc986)
+  ![image](https://github.com/HawkEye201/EquityInsights/assets/64590605/0bfba621-3d54-4558-ad7d-7216cb9eb137)
 
 - "localhost:3000/stocksByName" - GET
 
