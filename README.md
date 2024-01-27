@@ -1,7 +1,7 @@
 # EquityInsights
 ## Local Environment Setup:
 For running this project locally, you need to set up and define the environment variables.
-- Create .env in the root directory with the following variables:
+- Create .env in the root directory with the following variables and add the connection string from MongoDB:
     - MONGO_URI=
 
 ## Local Setup:
@@ -17,6 +17,7 @@ For running this project locally, you need to set up and define the environment 
 - "localhost:3000/addfavourites" - POST
   
   Sample Request Body:
+  
     {
       "code": "500003"
     }
@@ -25,6 +26,7 @@ For running this project locally, you need to set up and define the environment 
 - "localhost:3000/deletefavourites" - POST
   
   Sample Request Body:
+  
     {
       "code": "500003"
     }
