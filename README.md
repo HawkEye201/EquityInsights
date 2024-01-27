@@ -1,4 +1,11 @@
 # EquityInsights
+### Featues
+- Real-time stock data retrieval from the BSE website
+- Storage of stock data in MongoDB
+- Creation of a RESTful API using Express.js
+- Support for top 10 stocks retrieval, search by name, price history, favorites management (add, view, remove)
+- Refresh functionality to update data.
+- Perpetual caching of stock data for optimized performance
 ## Local Environment Setup:
 For running this project locally, you need to set up and define the environment variables.
 - Create .env in the root directory with the following variables and add the connection string from MongoDB:
