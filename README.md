@@ -12,17 +12,32 @@ For running this project locally, you need to set up and define the environment 
 
 ## API Endpoints
 - "localhost:3000/top10stocks" - GET
-- "localhost:3000/stocksByName" - GET
-- "localhost:3000/stockPriceHistory" - GET
-- "localhost:3000/addfavourites" - POST
   
+  ![image](https://github.com/HawkEye201/EquityInsights/assets/64590605/e5fe493b-604d-4b11-9fbd-fbc9d69fc986)
+
+- "localhost:3000/stocksByName" - GET
+
+    ![image](https://github.com/HawkEye201/EquityInsights/assets/64590605/f388c9f1-3892-4ca1-9a12-370fe57a32e3)
+
+
+- "localhost:3000/stockPriceHistory" - GET
+  
+  ![image](https://github.com/HawkEye201/EquityInsights/assets/64590605/c20edb55-731d-4ba4-83b6-90d6a05aef75)
+
+- "localhost:3000/addfavourites" - POST
+
   Sample Request Body:
   
     {
       "code": "500003"
     }
   
+  ![image](https://github.com/HawkEye201/EquityInsights/assets/64590605/d24cc836-bc4f-42d2-be15-3ca8a6f828c3)
+  
 - "localhost:3000/getfavourites" - GET
+  
+  ![image](https://github.com/HawkEye201/EquityInsights/assets/64590605/28efa991-9b08-4c4a-8bd7-4de4d1dd2eee)
+
 - "localhost:3000/deletefavourites" - POST
   
   Sample Request Body:
@@ -30,3 +45,6 @@ For running this project locally, you need to set up and define the environment 
     {
       "code": "500003"
     }
+
+  ![image](https://github.com/HawkEye201/EquityInsights/assets/64590605/e4c63642-6f70-45a8-b7a0-e4d5b885a414)
+
