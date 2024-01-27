@@ -17,10 +17,22 @@ For running this project locally, you need to set up and define the environment 
 
 - "localhost:3000/stocksByName" - GET
 
+  Sample Request Body:
+  
+    {
+      "name": "ABB"
+    }
+
     ![image](https://github.com/HawkEye201/EquityInsights/assets/64590605/f388c9f1-3892-4ca1-9a12-370fe57a32e3)
 
 
 - "localhost:3000/stockPriceHistory" - GET
+
+  Sample Request Body:
+  
+    {
+      "code": "500003"
+    }
   
   ![image](https://github.com/HawkEye201/EquityInsights/assets/64590605/c20edb55-731d-4ba4-83b6-90d6a05aef75)
 
