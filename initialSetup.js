@@ -38,60 +38,71 @@ const get50DaysData = async () => {
   if (lastUpdateFormattedDate == currentFormattedDate) {
     console.log("Already up to date");
   } else {
-    for (let i = 50; i >= 1; i--) {
-      let date = new Date(currentDate);
-      date.setDate(currentDate.getDate() - i);
+    let date = new Date();
+
+    if (isNaN(lastUpdateDate.getTime())) {
+      date.setDate(currentDate.getDate() - 50);
+    } else {
+      date = lastUpdateDate;
+    }
+
+    const currentDateOnly = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate()
+    );
+
+    for (; date < currentDateOnly; date.setDate(date.getDate() + 1)) {
       let formattedDate = formatDate(date);
-      if (date <= lastUpdateDate) {
-        continue;
-      } else {
-        await DownloadData(formattedDate)
-          .then(async (response) => {
-            const zipFilePath = `./Data/${formattedDate}.zip`;
-            if (response.data) {
-              fs.writeFileSync(zipFilePath, Buffer.from(response.data));
-              const csvData = ExtractZip(zipFilePath);
-              const lines = csvData.split("\n").slice(1);
-              for (const line of lines) {
-                const [code, name, group, type, open, high, low, close] =
-                  line.split(",");
-                if (!open) {
-                  break;
-                }
-                const existingStock = await dataToInsert.find(
-                  (stock) => stock.code === code
-                );
-                if (existingStock) {
-                  existingStock.data.push({
-                    open: parseFloat(open),
-                    high: parseFloat(high),
-                    low: parseFloat(low),
-                    close: parseFloat(close),
-                    date: date,
-                  });
-                } else {
-                  dataToInsert.push({
-                    name: name,
-                    code: code,
-                    data: [
-                      {
-                        open: parseFloat(open),
-                        high: parseFloat(high),
-                        low: parseFloat(low),
-                        close: parseFloat(close),
-                        date: date,
-                      },
-                    ],
-                  });
-                }
+
+      await DownloadData(formattedDate)
+        .then(async (response) => {
+          // console.log(date);
+          const zipFilePath = `./Data/${formattedDate}.zip`;
+          if (response.data) {
+            fs.writeFileSync(zipFilePath, Buffer.from(response.data));
+            const csvData = ExtractZip(zipFilePath);
+            const lines = csvData.split("\n").slice(1);
+            for (const line of lines) {
+              const [code, name, group, type, open, high, low, close] =
+                line.split(",");
+              if (!open) {
+                break;
+              }
+              const existingStock = await dataToInsert.find(
+                (stock) => stock.code === code
+              );
+              if (existingStock) {
+                existingStock.data.push({
+                  open: parseFloat(open),
+                  high: parseFloat(high),
+                  low: parseFloat(low),
+                  close: parseFloat(close),
+                  date: new Date(date),
+                });
+              } else {
+                dataToInsert.push({
+                  name: name,
+                  code: code,
+                  data: [
+                    {
+                      open: parseFloat(open),
+                      high: parseFloat(high),
+                      low: parseFloat(low),
+                      close: parseFloat(close),
+                      date: new Date(date),
+                    },
+                  ],
+                });
               }
             }
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
-      }
+          }
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
     }
+
     try {
       console.log("Data downloaded");
       if (isNaN(lastUpdateDate.getTime())) {
@@ -105,12 +116,12 @@ const get50DaysData = async () => {
             update: { $push: { data: { $each: data } } },
           },
         }));
-        const result = await StocksSchema.bulkWrite(bulkOperations, {
-          ordered: false,
-        });
-        console.log(`${result.modifiedCount} document(s) updated.`);
+        // const result = await StocksSchema.bulkWrite(bulkOperations, {
+        //   ordered: false,
+        // });
+        // console.log(`${result.modifiedCount} document(s) updated.`);
       }
-      saveLastUpadteDate(currentDate);
+      // saveLastUpadteDate(currentDate);
       DeleteFiles(path);
     } catch (error) {
       console.log(error.message);

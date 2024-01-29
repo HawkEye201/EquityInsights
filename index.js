@@ -1,11 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const NodeCache = require("node-cache");
 
 require("dotenv").config();
 
 require("./database");
 
 require("./initialSetup");
+
+const cache = new NodeCache();
+module.exports = cache;
 
 const app = express();
 const port = 3000;

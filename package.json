@@ -2,8 +2,11 @@
   "name": "equityinsights",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js","nodemonConfig": {
-    "ignore": ["lastUpdateDate.json"]
+  "main": "index.js",
+  "nodemonConfig": {
+    "ignore": [
+      "lastUpdateDate.json"
+    ]
   },
   "scripts": {
     "start": "node inedx.js",

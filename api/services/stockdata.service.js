@@ -1,7 +1,8 @@
 const StocksSchema = require("../../models/stocks");
+const cache = require("../../index");
 
 class StockDataService {
-  async top10Stocks() {
+  async top10Stocks(cacheKey) {
     try {
       const top10Stocks = await StocksSchema.aggregate([
         {
@@ -23,6 +24,12 @@ class StockDataService {
         { $sort: { lastClose: -1 } },
         { $limit: 10 },
       ]);
+      // console.log("CacheKey: " + cacheKey);
+      cache.set(
+        cacheKey,
+        { top10stocks: top10Stocks, date: new Date().getDate() },
+        3600 * 24
+      );
       return top10Stocks;
     } catch (error) {
       throw { message: error.message };

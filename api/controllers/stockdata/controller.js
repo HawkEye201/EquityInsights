@@ -3,7 +3,8 @@ const StockDataService = require("../../services/stockdata.service");
 module.exports = {
   top10stocks: async (req, res) => {
     try {
-      const top10Stocks = await StockDataService.top10Stocks();
+      const { cacheKey } = req.body;
+      const top10Stocks = await StockDataService.top10Stocks(cacheKey);
       res.status(200).json(top10Stocks);
     } catch (error) {
       res.send({
