@@ -1,7 +1,7 @@
 # EquityInsights
 EquityInsights is a Node.js project offering real-time stock data retrieval, storage in MongoDB, and RESTful API endpoints for stock analysis and management, with in-memory caching for optimized performance.
 
-### Featues
+### Features
 - Real-time stock data retrieval from the BSE website
 - Storage of stock data in MongoDB
 - Creation of a RESTful API using Express.js
