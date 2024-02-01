@@ -116,12 +116,12 @@ const get50DaysData = async () => {
             update: { $push: { data: { $each: data } } },
           },
         }));
-        // const result = await StocksSchema.bulkWrite(bulkOperations, {
-        //   ordered: false,
-        // });
-        // console.log(`${result.modifiedCount} document(s) updated.`);
+        const result = await StocksSchema.bulkWrite(bulkOperations, {
+          ordered: false,
+        });
+        console.log(`${result.modifiedCount} document(s) updated.`);
       }
-      // saveLastUpadteDate(currentDate);
+      saveLastUpadteDate(currentDate);
       DeleteFiles(path);
     } catch (error) {
       console.log(error.message);
